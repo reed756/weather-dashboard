@@ -22,18 +22,28 @@
                 class="p-3 block w-full border-transparent rounded-md focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:text-gray-400"
                 placeholder="Search for a city" formControlName="city">
             </div>
-            <div class="flex-[0_0_auto]">
-              <a class="p-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
-                href="#">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                  <path
-                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                </svg>
-              </a>
-            </div>
           </div>
         </form>
         <!-- End Form -->
+
+        <!-- Search Results-->
+        <ul
+          class="relative z-10 flex flex-col p-3 bg-white border rounded-lg shadow-lg shadow-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:shadow-gray-900/[.2]"
+          *ngIf="searchQuery">
+          <li
+            class="inline-flex items-center border-b-4 gap-x-2 py-3 px-4 text-sm font-medium bg-white text-gray-800 -mt-px first:rounded-t-lg first:mt-0 dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+            London
+          </li>
+          <li
+            class="inline-flex items-center gap-x-2 py-3 border-b-4 px-4 text-sm font-medium bg-white text-gray-800 -mt-px first:rounded-t-lg first:mt-0 dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+            Manchester
+          </li>
+          <li
+            class="inline-flex items-center gap-x-2 py-3 border-b-4 px-4 text-sm font-medium bg-white text-gray-800 -mt-px first:rounded-t-lg first:mt-0 dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+            Bristol
+          </li>
+        </ul>
+        <!-- End Search Results-->
 
         <!-- SVG Element -->
         <div class="hidden md:block absolute top-0 right-0 -translate-y-12 translate-x-20">
@@ -154,6 +164,30 @@
           </svg>
         </div>
         <!-- End SVG Element -->
+      </div>
+      <div
+        class="bg-white border rounded-xl mt-7 sm:mt-12 mx-auto max-w-xl relative shadow-sm sm:flex dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]"
+        *ngFor="let location of favouriteLocations" (click)="viewLocation()">
+        <div
+          class="flex-shrink-0 relative w-full rounded-t-xl overflow-hidden pt-[40%] sm:rounded-l-xl sm:max-w-[15rem] md:rounded-tr-none md:max-w-xs">
+          <img class="w-full h-full absolute top-0 left-0 object-cover" src="../../../assets/weather-icons/sun.svg"
+            alt="Image Description">
+        </div>
+        <div class="flex flex-wrap">
+          <div class="p-4 flex flex-col h-full sm:p-7">
+            <h3 class="text-lg font-bold text-gray-800 dark:text-white">
+              {{location}}
+            </h3>
+            <p class="mt-1 text-gray-800 dark:text-gray-400">
+              Some quick example text to build on the card title and make up the bulk of the card's content.
+            </p>
+            <div class="mt-5 sm:mt-auto">
+              <p class="text-xs text-gray-500 dark:text-gray-500">
+                Last updated 5 mins ago
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
