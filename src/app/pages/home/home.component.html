@@ -20,7 +20,7 @@
                   class="sr-only">Search for a city</span></label>
               <input type="email" name="hs-search-article-1" id="hs-search-article-1"
                 class="p-3 block w-full border-transparent rounded-md focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:text-gray-400"
-                placeholder="Search for a city" formControlName="city">
+                placeholder="Search for a city" formControlName="city" (change)="updateSearchQuery()">
             </div>
           </div>
         </form>
@@ -29,18 +29,11 @@
         <!-- Search Results-->
         <ul
           class="relative z-10 flex flex-col p-3 bg-white border rounded-lg shadow-lg shadow-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:shadow-gray-900/[.2]"
-          *ngIf="searchQuery">
+          *ngIf="weatherForm.value.city.length > 0 && searchResults">
           <li
-            class="inline-flex items-center border-b-4 gap-x-2 py-3 px-4 text-sm font-medium bg-white text-gray-800 -mt-px first:rounded-t-lg first:mt-0 dark:bg-gray-800 dark:border-gray-700 dark:text-white">
-            London
-          </li>
-          <li
-            class="inline-flex items-center gap-x-2 py-3 border-b-4 px-4 text-sm font-medium bg-white text-gray-800 -mt-px first:rounded-t-lg first:mt-0 dark:bg-gray-800 dark:border-gray-700 dark:text-white">
-            Manchester
-          </li>
-          <li
-            class="inline-flex items-center gap-x-2 py-3 border-b-4 px-4 text-sm font-medium bg-white text-gray-800 -mt-px first:rounded-t-lg first:mt-0 dark:bg-gray-800 dark:border-gray-700 dark:text-white">
-            Bristol
+            class="inline-flex items-center border-b-4 gap-x-2 py-3 px-4 text-sm font-medium bg-white text-gray-800 -mt-px first:rounded-t-lg first:mt-0 dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+            *ngFor="let result of searchResults">
+            {{result.name}}
           </li>
         </ul>
         <!-- End Search Results-->
