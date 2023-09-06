@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import cities from 'cities.json';
@@ -9,11 +9,9 @@ import { WeatherService } from 'src/app/services/weather/weather.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
 
   weatherForm!: FormGroup;
-
-  searchQuery = '';
   searchResults: City[] = [];
 
   favouriteLocations = [];
@@ -26,6 +24,21 @@ export class HomeComponent {
     this.weatherForm = this.fb.group({
       city: ['', [Validators.required, Validators.minLength(2)]],
     })
+  }
+
+  ngOnInit(): void {
+    if (this.weatherForm) {
+      this.weatherForm.valueChanges.subscribe((value) => {
+        // This callback function will be called whenever the input value changes.
+        console.log('Input Value Changed:', value);
+        // You can perform any action you need here.
+        if (value.city.length === 0) {
+          this.searchResults = [];
+          this.formSubmitted = false;
+        }
+      }
+      );
+    }
   }
 
   viewLocation() {

@@ -38,7 +38,7 @@
         <!-- Search Results-->
         <ul
           class="relative z-10 flex flex-col p-3 bg-white border rounded-lg shadow-lg shadow-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:shadow-gray-900/[.2]"
-          *ngIf="weatherForm.value.city.length > 0 && searchResults && formSubmitted">
+          *ngIf="weatherForm.value.city.length > 0 && searchResults.length > 0 && formSubmitted">
           <li
             class="inline-flex items-center border-b-4 gap-x-2 py-3 px-4 text-sm font-medium bg-white hover:bg-sky-500 hover:text-white text-gray-800 -mt-px first:rounded-t-lg first:mt-0 dark:bg-gray-800 dark:border-gray-700 dark:text-white cursor-pointer"
             *ngFor="let result of searchResults" (click)="getWeatherDetails(result.lat, result.lng)">
@@ -47,7 +47,7 @@
         </ul>
         <ul
           class="relative z-10 flex flex-col p-3 bg-white border rounded-lg shadow-lg shadow-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:shadow-gray-900/[.2]"
-          *ngIf="weatherForm.controls['city'].dirty && searchResults.length === 0 && formSubmitted">
+          *ngIf="weatherForm.controls['city'].dirty && weatherForm.value.city.length > 0 && searchResults.length === 0 && formSubmitted">
           <li
             class="inline-flex items-center border-b-4 gap-x-2 py-3 px-4 text-sm font-medium bg-white text-gray-800 -mt-px first:rounded-t-lg first:mt-0 dark:bg-gray-800 dark:border-gray-700 dark:text-white">
             No search results match that query, please try another
