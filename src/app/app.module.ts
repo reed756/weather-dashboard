@@ -8,11 +8,13 @@ import { LocationComponent } from './pages/location/location.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WeatherService } from './services/weather/weather.service';
 import { HttpClientModule } from '@angular/common/http';
+import { DirectionPipe } from './pipes/direction.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     LocationComponent,
+    DirectionPipe,
   ],
   imports: [
     BrowserModule,

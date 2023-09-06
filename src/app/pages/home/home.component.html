@@ -20,7 +20,16 @@
                   class="sr-only">Search for a city</span></label>
               <input type="email" name="hs-search-article-1" id="hs-search-article-1"
                 class="p-3 block w-full border-transparent rounded-md focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:text-gray-400"
-                placeholder="Search for a city" formControlName="city" (change)="updateSearchQuery()">
+                placeholder="Search for a city" formControlName="city">
+            </div>
+            <div class="flex-[0_0_auto]">
+              <a class="p-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
+                href="#" (click)="updateSearchQuery()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                  <path
+                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                </svg>
+              </a>
             </div>
           </div>
         </form>
@@ -29,11 +38,19 @@
         <!-- Search Results-->
         <ul
           class="relative z-10 flex flex-col p-3 bg-white border rounded-lg shadow-lg shadow-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:shadow-gray-900/[.2]"
-          *ngIf="weatherForm.value.city.length > 0 && searchResults">
+          *ngIf="weatherForm.value.city.length > 0 && searchResults && formSubmitted">
           <li
-            class="inline-flex items-center border-b-4 gap-x-2 py-3 px-4 text-sm font-medium bg-white text-gray-800 -mt-px first:rounded-t-lg first:mt-0 dark:bg-gray-800 dark:border-gray-700 dark:text-white"
-            *ngFor="let result of searchResults">
+            class="inline-flex items-center border-b-4 gap-x-2 py-3 px-4 text-sm font-medium bg-white hover:bg-sky-500 hover:text-white text-gray-800 -mt-px first:rounded-t-lg first:mt-0 dark:bg-gray-800 dark:border-gray-700 dark:text-white cursor-pointer"
+            *ngFor="let result of searchResults" (click)="getWeatherDetails(result.lat, result.lng)">
             {{result.name}}
+          </li>
+        </ul>
+        <ul
+          class="relative z-10 flex flex-col p-3 bg-white border rounded-lg shadow-lg shadow-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:shadow-gray-900/[.2]"
+          *ngIf="weatherForm.controls['city'].dirty && searchResults.length === 0 && formSubmitted">
+          <li
+            class="inline-flex items-center border-b-4 gap-x-2 py-3 px-4 text-sm font-medium bg-white text-gray-800 -mt-px first:rounded-t-lg first:mt-0 dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+            No search results match that query, please try another
           </li>
         </ul>
         <!-- End Search Results-->
