@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { LocalService } from 'src/app/services/local/local.service';
 
 @Component({
   selector: 'app-location',
@@ -10,7 +11,7 @@ export class LocationComponent implements OnInit {
 
   weatherInfo: any = {};
 
-  constructor(private route: ActivatedRoute, private router: Router) {
+  constructor(private route: ActivatedRoute, private router: Router, private localService: LocalService) {
 
   }
 
@@ -25,4 +26,14 @@ export class LocationComponent implements OnInit {
     this.router.navigate(['']);
   }
 
+  favourite() {
+    const existingFavourites = JSON.parse(this.localService.getData('favourites')!);
+    if (existingFavourites) {
+      existingFavourites.push({ lat: this.weatherInfo.coord.lat, lon: this.weatherInfo.coord.lon });
+      console.log(existingFavourites);
+      this.localService.saveData('favourites', JSON.stringify(existingFavourites));
+    } else {
+      this.localService.saveData('favourites', JSON.stringify([{ lat: this.weatherInfo.coord.lat, lon: this.weatherInfo.coord.lon }]));
+    }
+  }
 }

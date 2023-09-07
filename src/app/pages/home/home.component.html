@@ -176,7 +176,7 @@
         <!-- End SVG Element -->
       </div>
       <div
-        class="bg-white border rounded-xl mt-7 sm:mt-12 mx-auto max-w-xl relative shadow-sm sm:flex dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]"
+        class="bg-white border rounded-xl mt-7 sm:mt-12 mx-auto max-w-xl relative shadow-sm sm:flex dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7] cursor-pointer"
         *ngFor="let location of favouriteLocations" (click)="viewLocation()">
         <div
           class="flex-shrink-0 relative w-full rounded-t-xl overflow-hidden pt-[40%] sm:rounded-l-xl sm:max-w-[15rem] md:rounded-tr-none md:max-w-xs">
@@ -186,7 +186,7 @@
         <div class="flex flex-wrap">
           <div class="p-4 flex flex-col h-full sm:p-7">
             <h3 class="text-lg font-bold text-gray-800 dark:text-white">
-              {{location}}
+              {{location.name}}
             </h3>
             <p class="mt-1 text-gray-800 dark:text-gray-400">
               Some quick example text to build on the card title and make up the bulk of the card's content.

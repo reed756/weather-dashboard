@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import cities from 'cities.json';
 import { City } from 'src/app/models/city.model';
+import { LocalService } from 'src/app/services/local/local.service';
 import { WeatherService } from 'src/app/services/weather/weather.service';
 @Component({
   selector: 'app-home',
@@ -14,13 +15,13 @@ export class HomeComponent implements OnInit {
   weatherForm!: FormGroup;
   searchResults: City[] = [];
 
-  favouriteLocations = [];
+  favouriteLocations: any = [];
 
   citiesArray: any = cities;
 
   formSubmitted = false;
 
-  constructor(private fb: FormBuilder, private router: Router, private weatherService: WeatherService) {
+  constructor(private fb: FormBuilder, private router: Router, private weatherService: WeatherService, private localService: LocalService) {
     this.weatherForm = this.fb.group({
       city: ['', [Validators.required, Validators.minLength(2)]],
     })
@@ -38,6 +39,15 @@ export class HomeComponent implements OnInit {
         }
       }
       );
+    }
+    const existingFavourites = JSON.parse(this.localService.getData('favourites')!);
+    if (existingFavourites) {
+      existingFavourites.forEach((city: any) => {
+        this.weatherService.getWeatherInfo(city.lat, city.lon).subscribe((res) => {
+          this.favouriteLocations.push(res);
+        })
+      })
+      console.log(this.favouriteLocations);
     }
   }
 
