@@ -11,13 +11,16 @@ export class LocationComponent implements OnInit {
 
   weatherInfo: any = {};
 
+  showToast = false;
+
+  toastMessage: string = '';
+
   constructor(private route: ActivatedRoute, private router: Router, private localService: LocalService) {
 
   }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params): any => {
-      console.log(JSON.parse(params['weatherInfo']));
       this.weatherInfo = JSON.parse(params['weatherInfo']);
     })
   }
@@ -28,12 +31,23 @@ export class LocationComponent implements OnInit {
 
   favourite() {
     const existingFavourites = JSON.parse(this.localService.getData('favourites')!);
-    if (existingFavourites) {
+    if (existingFavourites && existingFavourites.length < 3) {
       existingFavourites.push({ lat: this.weatherInfo.coord.lat, lon: this.weatherInfo.coord.lon });
-      console.log(existingFavourites);
       this.localService.saveData('favourites', JSON.stringify(existingFavourites));
+      this.toggleToast('Location added to favourites');
+    } else if (existingFavourites && existingFavourites.length >= 3) {
+      this.toggleToast('Maximum favourites reached');
     } else {
       this.localService.saveData('favourites', JSON.stringify([{ lat: this.weatherInfo.coord.lat, lon: this.weatherInfo.coord.lon }]));
+      this.toggleToast('Location added to favourites');
     }
+  }
+
+  toggleToast(message: string) {
+    this.toastMessage = message
+    this.showToast = true;
+    setTimeout(() => {
+      this.showToast = false;
+    }, 2000);
   }
 }

@@ -31,7 +31,6 @@ export class HomeComponent implements OnInit {
     if (this.weatherForm) {
       this.weatherForm.valueChanges.subscribe((value) => {
         // This callback function will be called whenever the input value changes.
-        console.log('Input Value Changed:', value);
         // You can perform any action you need here.
         if (value.city.length === 0) {
           this.searchResults = [];
@@ -47,7 +46,6 @@ export class HomeComponent implements OnInit {
           this.favouriteLocations.push(res);
         })
       })
-      console.log(this.favouriteLocations);
     }
   }
 
@@ -56,8 +54,6 @@ export class HomeComponent implements OnInit {
   }
 
   updateSearchQuery(ev?: any) {
-    console.log(ev);
-    console.log(this.weatherForm.value.city);
     const searchedCity = this.weatherForm.value.city;
     this.filterSearchQuery(searchedCity);
     this.formSubmitted = true;
@@ -65,13 +61,19 @@ export class HomeComponent implements OnInit {
 
   filterSearchQuery(searchedCity: any) {
     this.searchResults = this.citiesArray.filter((city: { name: string; }) => city.name.toLowerCase().includes(searchedCity.toLowerCase()));
-    console.log(this.searchResults);
   }
 
   getWeatherDetails(lat: string, lng: string) {
     this.weatherService.getWeatherInfo(lat, lng).subscribe((res) => {
-      console.log(res);
       this.router.navigate(['location'], { queryParams: { weatherInfo: JSON.stringify(res) } });
     })
+  }
+
+  deleteFavourite(i: any) {
+    this.favouriteLocations.splice(i, 1);
+    const existingFavourites = JSON.parse(this.localService.getData('favourites')!);
+    existingFavourites.splice(i, 1);
+    const updatedFavourites = existingFavourites;
+    this.localService.saveData('favourites', JSON.stringify(updatedFavourites));
   }
 }
