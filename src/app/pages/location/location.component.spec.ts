@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LocationComponent } from './location.component';
+import { RouterTestingModule } from "@angular/router/testing";
+import { DirectionPipe } from 'src/app/pipes/direction.pipe';
 
 describe('LocationComponent', () => {
   let component: LocationComponent;
@@ -8,7 +10,10 @@ describe('LocationComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [LocationComponent]
+      declarations: [LocationComponent, DirectionPipe],
+      imports: [
+        RouterTestingModule
+      ]
     });
     fixture = TestBed.createComponent(LocationComponent);
     component = fixture.componentInstance;

@@ -30,8 +30,6 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     if (this.weatherForm) {
       this.weatherForm.valueChanges.subscribe((value) => {
-        // This callback function will be called whenever the input value changes.
-        // You can perform any action you need here.
         if (value.city.length === 0) {
           this.searchResults = [];
           this.formSubmitted = false;
