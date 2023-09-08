@@ -14,6 +14,7 @@ export class LocalService {
   getData(key: string): string | null {
     return localStorage.getItem(key)
   }
+
   removeData(key: string) {
     localStorage.removeItem(key);
   }
