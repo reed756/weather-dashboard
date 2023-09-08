@@ -20,9 +20,11 @@ export class LocationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe((params): any => {
-      this.weatherInfo = JSON.parse(params['weatherInfo']);
-    })
+    if (this.route.queryParams) {
+      this.route.queryParams.subscribe((params): any => {
+        this.weatherInfo = JSON.parse(params['weatherInfo']);
+      })
+    }
   }
 
   back() {
