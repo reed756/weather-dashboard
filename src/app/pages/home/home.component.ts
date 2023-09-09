@@ -47,10 +47,6 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  viewLocation() {
-    this.router.navigate(['location']);
-  }
-
   updateSearchQuery(ev?: any) {
     const searchedCity = this.weatherForm.value.city;
     this.filterSearchQuery(searchedCity);
@@ -68,10 +64,11 @@ export class HomeComponent implements OnInit {
   }
 
   deleteFavourite(i: any) {
-    this.favouriteLocations.splice(i, 1);
-    const existingFavourites = JSON.parse(this.localService.getData('favourites')!);
-    existingFavourites.splice(i, 1);
-    const updatedFavourites = existingFavourites;
-    this.localService.saveData('favourites', JSON.stringify(updatedFavourites));
+    if (i >= 0 && i < this.favouriteLocations.length) {
+      this.favouriteLocations.splice(i, 1);
+      const existingFavourites = JSON.parse(this.localService.getData('favourites')!);
+      existingFavourites.splice(i, 1);
+      this.localService.saveData('favourites', JSON.stringify(existingFavourites));
+    }
   }
 }
