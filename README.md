@@ -4,23 +4,17 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## What is it?
 
-This is a weather App built using TypeScript, Angular, Tailwind.css, Preline UI, RxJS, Jasmine and Karma.
+This is a weather App built using TypeScript, Angular, Tailwind.css, Preline UI, RxJS, Jasmine and Karma. It uses the OpenWeatherMap API on the backend and the app itself is hosted on Netlify.
 
-## Why did I build it?
+## Challenges
 
-I built this as a good excuse to learn unit testing in Angular.
-
-## What problem does it solve?
-
-Allows users to check the weather for a particular location and also save their favourite locations to local storage.
-
-## What did I learn?
-
-I learnt about unit testing in Angular and also that there are ways to write code so that it makes the process of unit testing easier which I will keep in mind for future projects.
+The main challenge I faced with this project was familiarising myself with Unit testing in Angular. Thankfully their documentation for testing is good and anything not covered there was found with a google search. It's something I want to improve on and add to future projects. 
 
 ## Features
 
-- Able to save locations to local storage
+- Able to save favourite locations to local storage
+- Can search through a dataset of 1000's of cities
+- Unit tests using the Jasmine framework
 
 ## Development server
 
