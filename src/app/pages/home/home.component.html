@@ -41,7 +41,7 @@
           *ngIf="weatherForm.value.city.length > 0 && searchResults.length > 0 && formSubmitted">
           <li
             class="inline-flex items-center border-b-4 gap-x-2 py-3 px-4 text-sm font-medium bg-white hover:bg-sky-500 hover:text-white text-gray-800 -mt-px first:rounded-t-lg first:mt-0 dark:bg-gray-800 dark:border-gray-700 dark:text-white cursor-pointer"
-            *ngFor="let result of searchResults" (click)="getWeatherDetails(result.lat, result.lng)">
+            *ngFor="let result of searchResults" (click)="getWeatherDetails(result.lat, result.lng)" @flyInOut>
             {{result.name}}
           </li>
         </ul>
